@@ -7,7 +7,7 @@ export default function Photo({ photo }) {
       <div className={styles.image}>
         <Image
           alt=""
-          src={photo.imageSrc}
+          src={photo.url}
           height={600}
           width={600}
           objectFit="cover"
@@ -16,8 +16,7 @@ export default function Photo({ photo }) {
 
       <div className={styles.sidebar}>
         <ul className={styles.sidebarList}>
-          <h3>{photo.name}</h3>
-          <p>Taken by {photo.username}</p>
+          <h3>{photo.caption}</h3>
         </ul>
       </div>
     </div>

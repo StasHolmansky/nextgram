@@ -1,21 +1,18 @@
 import React from 'react';
 import Photo from '../../components/frame';
 import swagPhotos from '../../photos';
+import usePhoto from '../../utils/usePhoto';
+import router, { useRouter } from 'next/router';
 
-export function getStaticProps({ params: { id } }) {
-  const photo = swagPhotos.find((p) => p.id === id);
-  return { props: { photo } };
-}
 
-export function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' };
-}
-
-export default function PhotoPage({ photo }) {
+export default function PhotoPage() {
+  const router = useRouter();
+  const { id } = router.query;
+  const [photo, photoIsLoading] = usePhoto(id);
   return (
     <div className="permalink">
       <div className="wrap">
-        <Photo photo={photo} />
+        {!photo ? <p>Loading...</p> : <Photo photo={photo} />}
       </div>
       <style jsx>{`
         .permalink {
