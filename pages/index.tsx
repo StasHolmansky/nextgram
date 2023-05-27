@@ -6,6 +6,8 @@ import Modal from "../components/modal";
 import BlurImage from "../components/BlurImage";
 import { usePhotos } from "../utils/usePhotos"
 import { usePhoto } from "../utils/usePhoto"
+import { supabase } from "../utils/supabase";
+import { useUser } from "@supabase/auth-helpers-react";
 
 export default function Home() {
   const router = useRouter();
