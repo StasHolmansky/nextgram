@@ -1,39 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { supabase } from '../../utils/supabase';
 
 export default function Upload() {
-  const supabase = useSupabaseClient()
   const [uploading, setUploading] = useState(false)
 
-  const uploadAvatar = async (event: { target: { files: string | any[] } }) => {
+  const uploadAvatar = async (event) => {
     try {
       setUploading(true)
-
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error('You must select an image to upload.')
       }
-
+         
       const file = event.target.files[0]
       const fileExt = file.name.split('.').pop()
       const fileName = `${Math.random()}.${fileExt}`
       const filePath = `${fileName}`
-
-      let { error: uploadError, data } = await supabase.storage
-        .from('photos')
-        .upload(filePath, file, { upsert: true })
+      let { error: uploadError } = await supabase.storage
+      .from('photos')
+      .upload(filePath, file, { upsert: true })
 
       if (uploadError) {
         throw uploadError
       }
-
-      const publicURL = supabase.storage.from("photos").getPublicUrl(filePath);
-      const { data: { user } } = await supabase.auth.getUser()
-
-      console.log({data: { user }});
-      await supabase
-        .from('photos')
-        .insert({ id: 1, url: publicURL })
-
+      
+      const publicURL = supabase.storage.from("photos").getPublicUrl(filePath).data.publicUrl;
+      // const publicURL = 'https://pbs.twimg.com/media/E8txb2yVkAQxRVw?format=jpg';
+      const userID = (await supabase.auth.getUser()!).data.user.id;
+      // const publicURL = supabase.from("photos").select();
+      await supabase.from("photos").insert({
+        user_id: userID,
+        url: publicURL
+      })            
+      console.log((await supabase.auth.getUser()!));
+      console.log(publicURL);
+      
+      
     } catch (error) {
       console.log(error.message)
     } finally {
@@ -55,6 +56,7 @@ export default function Upload() {
           type="file"
           id="single"
           accept="image/*"
+          onChange={uploadAvatar}
           disabled={uploading}
         />
       </div>

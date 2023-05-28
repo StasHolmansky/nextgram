@@ -12,6 +12,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 export default function Home() {
   const router = useRouter();
   const { photoId } = router.query;
+
   const [photo, photoIsLoading] = usePhoto(photoId);
 
   const onDismiss = useCallback(() => {
