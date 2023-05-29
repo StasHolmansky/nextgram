@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ['pbs.twimg.com', 'hrtluurzaygqtpzqncxz.supabase.co'],
+    domains: ['pbs.twimg.com', 'jaiiqututbptgifflmwv.supabase.co'],
   },
 };

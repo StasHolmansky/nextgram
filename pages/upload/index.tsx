@@ -59,6 +59,7 @@ export default function Upload() {
           onChange={uploadAvatar}
           disabled={uploading}
         />
+        <div><a href='/'>Home</a></div>
       </div>
     </div>
   )

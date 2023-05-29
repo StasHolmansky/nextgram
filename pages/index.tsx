@@ -37,6 +37,12 @@ export default function Home() {
       <div>
         <h1>NextGram</h1>
       </div>
+      <div>
+        <ul>
+          <li><a href="/auth">Auth</a></li>
+          <li><a href="/upload">Upload</a></li>
+        </ul>
+      </div>
       {photo && <Modal photo={photo} onDismiss={onDismiss} />}
       <div className={styles.images}>
         {isLoading? 

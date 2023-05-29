@@ -140,7 +140,7 @@ export default function Auth() {
                 </div>
             </div>
         }
-
+        <div><a href="/">Home</a></div>
       </main>
     );
   }
