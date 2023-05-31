@@ -6,6 +6,7 @@ import { usePhotos } from "../utils/usePhotos";
 import { usePhoto } from "../utils/usePhoto";
 import { supabase } from "../utils/supabase";
 import Photo from "../components/frame";
+import User from "../components/UserData";
 import { Box, Button, Container, Grid, Modal } from "@mui/material";
 
 const style = {
@@ -21,9 +22,8 @@ const style = {
 export default function Home() {
     const router = useRouter();
     const { photoId } = router.query;
-
     const [photo, photoIsLoading] = usePhoto(photoId);
-
+    const [nameFirst, setNameFirst] = useState<any>();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -37,6 +37,24 @@ export default function Home() {
         await supabase.auth.signOut();
         router.reload();
     };
+    const user = User();
+
+    async function getProfile() {
+        try {
+            let name = supabase
+                .from("users")
+                .select(`name_first`)
+                .eq("id", user.id);
+            console.log(name);
+        } catch (error) {
+            alert("Error loading user data!");
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getProfile();
+    }, []);
 
     const [photos, isLoading] = usePhotos();
 
@@ -54,7 +72,7 @@ export default function Home() {
             </Modal>
             <Box sx={{ textAlign: "center" }}>
                 <h1>NextGram</h1>
-
+                <div>{user ? user.email : ""}</div>
                 <Button onClick={handleLogout} variant="text">
                     Logout
                 </Button>
