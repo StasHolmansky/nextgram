@@ -3,6 +3,7 @@ import Photo from '../../components/frame';
 import swagPhotos from '../../photos';
 import usePhoto from '../../utils/usePhoto';
 import router, { useRouter } from 'next/router';
+import { Box, CircularProgress, Container, Grid } from '@mui/material';
 
 
 export default function PhotoPage() {
@@ -10,22 +11,22 @@ export default function PhotoPage() {
   const { id } = router.query;
   const [photo, photoIsLoading] = usePhoto(id);
   return (
-    <div className="permalink">
-      <div className="wrap">
-        {!photo ? <p>Loading...</p> : <Photo photo={photo} />}
-      </div>
-      <style jsx>{`
-        .permalink {
-          padding: 100px;
-          text-align: center;
-        }
-
-        .wrap {
-          display: inline-block;
-          border: 1px solid #999;
-          margin: auto;
-        }
-      `}</style>
-    </div>
+    <Container fixed>
+      {photo ? (
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Photo photo={photo} />
+          </Grid>
+          <Grid item xs={4}>
+            //
+          </Grid>
+        </Grid>
+      ) : (
+        <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height:'100vh'}}>
+          <CircularProgress disableShrink />
+        </Box>
+      )
+      }
+    </Container>
   );
 }
