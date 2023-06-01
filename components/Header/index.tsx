@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { supabase } from "../../utils/supabase";
 import User from "../../components/UserData";
-import { Grid, IconButton, Link, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Link, Typography } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 export default function Header() {
@@ -22,7 +22,11 @@ export default function Header() {
         >
             <Grid item>
                 <Typography variant="h2" component="h1" gutterBottom>
-                    <Link href="/" underline="none">
+                    <Link
+                        sx={{ cursor: "pointer" }}
+                        underline="none"
+                        onClick={() => router.push("/")}
+                    >
                         NextGram
                     </Link>
                 </Typography>
@@ -62,21 +66,20 @@ export default function Header() {
                                 component="p"
                                 gutterBottom
                             >
-                                <Link
-                                    href="#"
-                                    onClick={handleLogout}
-                                    underline="none"
-                                >
+                                <Button variant="text" onClick={handleLogout}>
                                     SIGN OUT
-                                </Link>
+                                </Button>
                             </Typography>
                         </Grid>
                     </Grid>
                 ) : (
                     <Typography variant="body1" component="p" gutterBottom>
-                        <Link href="/auth" underline="none">
+                        <Button
+                            variant="text"
+                            onClick={() => router.push("/auth")}
+                        >
                             SIGN IN
-                        </Link>
+                        </Button>
                     </Typography>
                 )}
             </Grid>
