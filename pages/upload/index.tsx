@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { supabase } from "../../utils/supabase";
+import { Button, Container, Grid } from "@mui/material";
+import Header from "../../components/Header";
+import router from "next/router";
 
 export default function Upload() {
     const [uploading, setUploading] = useState(false);
@@ -26,15 +29,17 @@ export default function Upload() {
             const publicURL = supabase.storage
                 .from("photos")
                 .getPublicUrl(filePath).data.publicUrl;
-            // const publicURL = 'https://pbs.twimg.com/media/E8txb2yVkAQxRVw?format=jpg';
             const userID = (await supabase.auth.getUser()!).data.user.id;
-            // const publicURL = supabase.from("photos").select();
-            await supabase.from("photos").insert({
-                user_id: userID,
-                url: publicURL,
-            });
-            console.log(await supabase.auth.getUser()!);
-            console.log(publicURL);
+            await supabase
+                .from("photos")
+                .insert({
+                    user_id: userID,
+                    url: publicURL,
+                    // caption: captionText,
+                })
+                .single();
+
+            router.push("/");
         } catch (error: any) {
             console.log(error.message);
         } finally {
@@ -43,26 +48,23 @@ export default function Upload() {
     };
 
     return (
-        <div>
-            <div style={{ width: 300 }}>
-                <label className="button primary block" htmlFor="single">
-                    {uploading ? "Uploading ..." : "Upload"}
+        <Container fixed>
+            <Header />
+            <Grid container justifyContent="center" alignItems="center">
+                <label htmlFor="container-button-file">
+                    <input
+                        style={{ visibility: "hidden", position: "absolute" }}
+                        type="file"
+                        id="container-button-file"
+                        accept="image/*"
+                        onChange={uploadAvatar}
+                        disabled={uploading}
+                    />
+                    <Button variant="contained" component="span">
+                        {uploading ? "Uploading..." : "Upload"}
+                    </Button>
                 </label>
-                <input
-                    style={{
-                        visibility: "hidden",
-                        position: "absolute",
-                    }}
-                    type="file"
-                    id="single"
-                    accept="image/*"
-                    onChange={uploadAvatar}
-                    disabled={uploading}
-                />
-                <div>
-                    <a href="/">Home</a>
-                </div>
-            </div>
-        </div>
+            </Grid>
+        </Container>
     );
 }
