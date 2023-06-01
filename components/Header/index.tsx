@@ -1,15 +1,7 @@
 import { useRouter } from "next/router";
 import { supabase } from "../../utils/supabase";
 import User from "../../components/UserData";
-import {
-    Box,
-    Button,
-    Grid,
-    IconButton,
-    Link,
-    Link as MLink,
-    Typography,
-} from "@mui/material";
+import { Grid, IconButton, Link, Typography } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 export default function Header() {
@@ -18,7 +10,7 @@ export default function Header() {
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
-        router.push("/");
+        router.reload();
     };
 
     return (
@@ -29,11 +21,22 @@ export default function Header() {
             alignItems="center"
         >
             <Grid item>
-                <Typography variant="h3" gutterBottom>
+                <Typography variant="h2" component="h1" gutterBottom>
                     <Link href="/" underline="none">
                         NextGram
                     </Link>
                 </Typography>
+            </Grid>
+            <Grid item>
+                <IconButton
+                    size="large"
+                    color="primary"
+                    aria-label="upload picture"
+                    component="span"
+                    onClick={() => router.push("/upload")}
+                >
+                    <PhotoCamera />
+                </IconButton>
             </Grid>
             <Grid item>
                 {user ? (
@@ -45,34 +48,36 @@ export default function Header() {
                         alignItems="center"
                     >
                         <Grid item>
-                            <IconButton
-                                color="primary"
-                                aria-label="upload picture"
-                                component="span"
-                                onClick={() => router.push("/upload")}
+                            <Typography
+                                variant="body1"
+                                component="p"
+                                gutterBottom
                             >
-                                <PhotoCamera />
-                            </IconButton>
+                                {user.email}
+                            </Typography>
                         </Grid>
                         <Grid item>
-                            <Grid container spacing={2}>
-                                <Grid item>{user.email}</Grid>
-                                <Grid item>
-                                    <Link
-                                        href="#"
-                                        onClick={handleLogout}
-                                        underline="none"
-                                    >
-                                        SIGN OUT
-                                    </Link>
-                                </Grid>
-                            </Grid>
+                            <Typography
+                                variant="body1"
+                                component="p"
+                                gutterBottom
+                            >
+                                <Link
+                                    href="#"
+                                    onClick={handleLogout}
+                                    underline="none"
+                                >
+                                    SIGN OUT
+                                </Link>
+                            </Typography>
                         </Grid>
                     </Grid>
                 ) : (
-                    <Link href="/auth" underline="none">
-                        SIGN IN
-                    </Link>
+                    <Typography variant="body1" component="p" gutterBottom>
+                        <Link href="/auth" underline="none">
+                            SIGN IN
+                        </Link>
+                    </Typography>
                 )}
             </Grid>
         </Grid>

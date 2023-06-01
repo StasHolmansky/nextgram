@@ -1,18 +1,11 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import BlurImage from "../components/BlurImage/index";
 import { usePhotos } from "../utils/usePhotos";
 import { usePhoto } from "../utils/usePhoto";
 import Photo from "../components/frame";
-import {
-    Box,
-    Button,
-    Container,
-    Grid,
-    Modal,
-    Link as MLink,
-} from "@mui/material";
+import { Box, Container, Grid, Modal } from "@mui/material";
 import Header from "../components/Header";
 
 const style = {
@@ -20,7 +13,8 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 800,
+    maxHeight: "90%",
+    minWidth: "373px",
     bgcolor: "background.paper",
     boxShadow: 24,
 };
@@ -31,7 +25,10 @@ export default function Home() {
     const [photo, photoIsLoading] = usePhoto(photoId);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        router.push("/");
+    };
 
     useEffect(() => {
         if (photo) handleOpen();
@@ -58,7 +55,7 @@ export default function Home() {
                     <p>Loading</p>
                 ) : (
                     photos.map(({ id, url }: any) => (
-                        <Grid key={id} item xs={4}>
+                        <Grid key={id} item>
                             <Link
                                 legacyBehavior
                                 href={{

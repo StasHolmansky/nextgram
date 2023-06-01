@@ -2,8 +2,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import React from "react";
 import { supabase } from "../../utils/supabase";
-import { Box, Button, Container, Grid, Paper, TextField } from "@mui/material";
+import {
+    Box,
+    Button,
+    Container,
+    Grid,
+    Paper,
+    TextField,
+    Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Header from "../../components/Header";
 
 const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
@@ -60,11 +69,19 @@ export default function Auth() {
 
     return (
         <Container fixed>
-            <Box sx={{ textAlign: "center" }}>
-                <h1>NextGram</h1>
-                <h2>Auth</h2>
-            </Box>
-
+            <Header />
+            <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Grid item>
+                    <Typography variant="h4" component="h2" gutterBottom>
+                        Auth
+                    </Typography>
+                </Grid>
+            </Grid>
             <Grid
                 container
                 direction="column"
@@ -122,7 +139,13 @@ export default function Auth() {
                             }}
                             disabled={loading}
                         >
-                            <span>{loading ? "Loading" : "Sign Up"}</span>
+                            <Typography
+                                variant="body1"
+                                component="p"
+                                gutterBottom
+                            >
+                                <span>{loading ? "Loading" : "Sign Up"}</span>
+                            </Typography>
                         </Button>
                     </Grid>
                 ) : (
@@ -158,7 +181,13 @@ export default function Auth() {
                             }}
                             disabled={loading}
                         >
-                            <span>{loading ? "Loading" : "Sign In"}</span>
+                            <Typography
+                                variant="body1"
+                                component="p"
+                                gutterBottom
+                            >
+                                <span>{loading ? "Loading" : "Sign In"}</span>
+                            </Typography>
                         </Button>
                     </Grid>
                 )}
@@ -175,11 +204,13 @@ export default function Auth() {
                         }}
                         disabled={loading}
                     >
-                        <span>
-                            {isRegister
-                                ? "ALREADY HAVE AN ACCOUNT"
-                                : "STILL HAVE NO ACCOUNT"}
-                        </span>
+                        <Typography variant="body1" component="p" gutterBottom>
+                            <span>
+                                {isRegister
+                                    ? "ALREADY HAVE AN ACCOUNT"
+                                    : "STILL HAVE NO ACCOUNT"}
+                            </span>
+                        </Typography>
                     </Button>
                 </Grid>
             </Grid>

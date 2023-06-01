@@ -35,13 +35,12 @@ export default function Upload() {
                 .insert({
                     user_id: userID,
                     url: publicURL,
-                    // caption: captionText,
                 })
                 .single();
 
             router.push("/");
         } catch (error: any) {
-            console.log(error.message);
+            alert("The user is not known, please log in or register!");
         } finally {
             setUploading(false);
         }

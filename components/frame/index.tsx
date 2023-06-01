@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Photo({ photo }: any) {
     return (
         <img
@@ -7,6 +5,7 @@ export default function Photo({ photo }: any) {
             src={`${photo.url}`}
             srcSet={`${photo.url}`}
             width="100%"
+            height="auto"
             loading="lazy"
         />
     );

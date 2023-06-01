@@ -22,7 +22,5 @@ export default function User() {
         fetchUserData();
     }, []);
 
-    // console.log(user);
-
     return user;
 }

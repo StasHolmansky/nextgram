@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import cn from "clsx";
 
 export default function BlurImage(props: any): JSX.Element {
     const [isLoading, setLoading] = useState(true);
@@ -10,8 +9,10 @@ export default function BlurImage(props: any): JSX.Element {
             onLoadingComplete={() => setLoading(false)}
             alt="photo"
             style={{
-                maxWidth: "100%",
-                height: "auto"
-            }} />
+                height: "373px",
+                width: "100%",
+                minWidth: "300px",
+            }}
+        />
     );
 }

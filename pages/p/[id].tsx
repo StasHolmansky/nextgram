@@ -1,6 +1,5 @@
 import React from "react";
 import Photo from "../../components/frame";
-import swagPhotos from "../../photos";
 import usePhoto from "../../utils/usePhoto";
 import router, { useRouter } from "next/router";
 import {
