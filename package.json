@@ -1,35 +1,32 @@
 {
-  "name": "nextgram",
-  "homepage": "https://stasholmansky.github.io/nextgram/",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "deploy": "gh-pages -d .next",
-    "predeploy": "yarn run build"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.2",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.3",
-    "@supabase/auth-helpers-nextjs": "^0.7.0",
-    "@supabase/auth-helpers-react": "^0.4.0",
-    "@supabase/supabase-js": "^2.22.0",
-    "clsx": "^1.1.1",
-    "gh": "^2.8.9",
-    "gh-pages": "^5.0.0",
-    "next": "latest",
-    "pages": "^0.0.16",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "vue-supabase": "^2.3.0"
-  },
-  "devDependencies": {
-    "@types/react": "18.2.7",
-    "sass": "^1.49.9",
-    "typescript": "5.0.4"
-  }
+    "name": "nextgram",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
+        "@fontsource/roboto": "^5.0.2",
+        "@mui/icons-material": "^5.11.16",
+        "@mui/material": "^5.13.3",
+        "@supabase/auth-helpers-nextjs": "^0.7.0",
+        "@supabase/auth-helpers-react": "^0.4.0",
+        "@supabase/supabase-js": "^2.22.0",
+        "clsx": "^1.1.1",
+        "gh": "^2.8.9",
+        "gh-pages": "^5.0.0",
+        "next": "latest",
+        "pages": "^0.0.16",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vue-supabase": "^2.3.0"
+    },
+    "devDependencies": {
+        "@types/react": "18.2.7",
+        "sass": "^1.49.9",
+        "typescript": "5.0.4"
+    }
 }
